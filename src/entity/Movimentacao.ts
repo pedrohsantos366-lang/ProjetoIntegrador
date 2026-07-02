@@ -15,8 +15,8 @@ export class Movimentacao {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Endereco, (endereco) => endereco.movimentacoes) // <-- Apontando para o plural
-  endereco!: Endereco; // <-- Com a exclamação "!"
+  @ManyToOne(() => Endereco, (endereco) => endereco.movimentacoes)
+  endereco!: Endereco;
 
   @ManyToOne(() => Produtos, (produto) => produto.movimentacao)
   produto!: Produtos;

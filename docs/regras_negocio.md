@@ -33,8 +33,8 @@ O sistema deve indicar visualmente o status de cada posição através de LEDs.
 Os estados possíveis são:
 
 - Livre
-- Ocupado
-- Em movimentação
+- Ocupado em movimentacao
+- Bloqueado
 
 ---
 
@@ -50,7 +50,7 @@ O sistema deve utilizar ferramentas acessíveis, como:
 - Tags de identificação
 
 ### RNF02 - Facilidade de Uso
-O sistema deve ser simples e intuitivo, dispensando treinamento avançado dos operadores.
+O sistema deve ser simples, responsivo e intuitivo, dispensando treinamento avançado dos operadores.
 
 ### RNF03 - Confiabilidade
 O sistema deve garantir precisão das informações para apoiar a tomada de decisões.

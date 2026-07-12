@@ -1,45 +1,10 @@
 import { Router } from "express";
-import { MovimentacaoController } from './../controller/MovimentacaoController';
+import { MovimentacaoController } from "../controller/MovimentacaoController";
 
+const router = Router();
+const movimentacaocontroller = new MovimentacaoController();
 
-const movimentacaoRoutes = Router();
+router.post("/entrada", movimentacaocontroller.entrada);
+router.post("/saida", movimentacaocontroller.saida);
 
-const movimentacaoController =
-    new MovimentacaoController();
-
-movimentacaoRoutes.post(
-    "/movimentacoes",
-    movimentacaoController.create.bind(
-        movimentacaoController
-    )
-);
-
-movimentacaoRoutes.get(
-    "/movimentacoes",
-    movimentacaoController.listAll.bind(
-        movimentacaoController
-    )
-);
-
-movimentacaoRoutes.get(
-    "/movimentacoes/:id",
-    movimentacaoController.listById.bind(
-        movimentacaoController
-    )
-);
-
-//movimentacaoRoutes.put(
-  //  "/movimentacoes/:id",
-  //  movimentacaoController.update.bind(
-  //      movimentacaoController
-  //  )
-//);
-
-//movimentacaoRoutes.delete(
-//    "/movimentacoes/:id",
-//    movimentacaoController.delete.bind(
-//        movimentacaoController
-//    )
-//);
-
-export default movimentacaoRoutes;
+export const movimentacaoRoutes = router;

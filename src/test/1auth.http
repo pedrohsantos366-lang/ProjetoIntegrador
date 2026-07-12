@@ -1,0 +1,34 @@
+
+
+
+### Registrar admin
+POST http://localhost:3000/api/auth/registrar
+Content-Type: application/json
+
+{
+  "nome": "Admin",
+  "email": "admin@locadora.com",
+  "senha": "1234",
+  "role": "admin"
+}
+
+### Registrar funcionario
+POST http://localhost:3000/api/auth/registrar
+Content-Type: application/json
+
+{
+  "nome": "Funcionario 2",
+  "email": "func12@locadora.com",
+  "senha": "1234",
+  "role": "funcionario"
+}
+
+
+### Logar
+POST http://localhost:3000/api/auth/logar
+Content-Type: application/json
+
+{
+  "email": "admin@locadora.com",
+  "senha": "1234"
+}

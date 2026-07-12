@@ -1,0 +1,18 @@
+@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzgzODgzNzEzLCJleHAiOjE3ODM5MTI1MTN9.Ejagy7LVRdJu_3vy-4W_AMyWmYhAV-_pyKjezL5wAAo
+
+### Criar alocação (nível de uma estante)
+POST http://localhost:3000/api/alocacao
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "enderecoId": 1,
+  "nivel": 2,
+  "altura": 1,
+  "profundidade": 1,
+  "comprimento": 32
+}
+
+### Buscar todos
+GET http://localhost:3000/api/alocacao
+Authorization: Bearer {{token}}

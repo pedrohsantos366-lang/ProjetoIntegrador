@@ -1,0 +1,25 @@
+@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzgzODgzNTM2LCJleHAiOjE3ODM5MTIzMzZ9.Fgvo5FLZ3CNxrRE0MYAuUm5Jls9arYgQEv_uKcOfWok
+
+
+### Buscar Todos
+GET http://localhost:3000/api/usuarios
+Authorization: Bearer {{token}}
+
+###
+
+### Atualizar
+PUT http://localhost:3000/api/usuarios/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "nome": "João Silva",
+  "email": "joao@email.com",
+  "senha": "123456",
+  "role": "usuario",
+  "ativo": false
+}
+
+### Deletar
+DELETE http://localhost:3000/api/usuarios/2
+Authorization: Bearer {{token}}

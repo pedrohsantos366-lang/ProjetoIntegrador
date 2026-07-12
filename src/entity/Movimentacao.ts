@@ -1,13 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from "typeorm";
-import { JoinColumn } from "typeorm";
-import { IsNotEmpty, IsString, IsNumber } from "class-validator";
 import { Produtos } from "./Produtos";
-import { Endereco } from "./endereco";
-//import { Usuario } from "./Usuario";
+import { Usuario } from "./usuario";
+import { ColunaVirtual } from "./ColunaVirtual";
 
 export enum Status {
-  ENT = "entrada",
-  SD = "saida",
+  ENTRADA = "entrada",
+  SAIDA = "saida",
 }
 
 @Entity("movimentacao")
@@ -15,28 +13,24 @@ export class Movimentacao {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Endereco, (endereco) => endereco.movimentacoes)
-  endereco!: Endereco;
+  @ManyToOne(() => Usuario)
+  usuario!: Usuario; // quem fez o cadastro
 
-  @ManyToOne(() => Produtos, (produto) => produto.movimentacao)
+  @ManyToOne(() => Produtos)
   produto!: Produtos;
+
+  @ManyToOne(() => ColunaVirtual)
+  coluna!: ColunaVirtual; // em qual LED ficou
 
   @Column({ type: "enum", enum: Status })
   status!: Status;
 
-  @IsNotEmpty()
-  @IsNumber()
   @Column("int")
-  quantidade!: number;
+  quantidade!: number; // quantas caixas
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-  dataEntrada!: Date;
-
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-  dataSaida!: Date;
-
-  @IsNotEmpty()
-  @IsString()
-  @Column("varchar")
+  @Column({ type: "varchar", nullable: true })
   observacoes!: string;
+
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  dataMovimentacao!: Date;
 }

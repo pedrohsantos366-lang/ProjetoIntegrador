@@ -1,0 +1,19 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzgzODgzNTM2LCJleHAiOjE3ODM5MTIzMzZ9.Fgvo5FLZ3CNxrRE0MYAuUm5Jls9arYgQEv_uKcOfWok
+
+### Listar todas as colunas virtuais (com produto, alocação e endereço)
+GET http://localhost:3000/api/colunas
+Authorization: Bearer {{token}}
+
+###
+
+### Estoque geral — quantidade total de cada produto no estoque
+GET http://localhost:3000/api/colunas/estoque
+Authorization: Bearer {{token}}
+
+###
+
+### Estoque total de um produto específico
+GET http://localhost:3000/api/colunas/estoque/1
+Authorization: Bearer {{token}}
+
+###

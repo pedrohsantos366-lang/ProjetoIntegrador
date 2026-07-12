@@ -1,0 +1,28 @@
+@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzgzODgzNzEzLCJleHAiOjE3ODM5MTI1MTN9.Ejagy7LVRdJu_3vy-4W_AMyWmYhAV-_pyKjezL5wAAo
+
+### Criar endereço
+POST http://localhost:3000/api/enderecos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "rua": 1,
+  "estante": "B"
+}
+
+### Buscar todos
+GET http://localhost:3000/api/enderecos
+Authorization: Bearer {{token}}
+
+### Atualizar
+PUT http://localhost:3000/api/enderecos/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "estante": "A"
+}
+
+### Deletar
+DELETE http://localhost:3000/api/enderecos/1
+Authorization: Bearer {{token}}

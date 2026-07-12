@@ -1,0 +1,20 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzgzODgzNTM2LCJleHAiOjE3ODM5MTIzMzZ9.Fgvo5FLZ3CNxrRE0MYAuUm5Jls9arYgQEv_uKcOfWok
+### Registrar entrada
+POST http://localhost:3000/api/movimentacao/entrada
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "produtoId": 1,
+  "quantidade": 10
+}
+
+### Registrar saída
+POST http://localhost:3000/api/movimentacao/saida
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "produtoId": 1,
+  "quantidade": 4
+}

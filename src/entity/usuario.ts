@@ -1,11 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import {
-  IsBoolean,
-  IsEmail,
-  IsEnum,
-  IsNotEmpty,
-  IsString,
-} from "class-validator";
+import { IsBoolean, IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 @Entity()
 export class Usuario {

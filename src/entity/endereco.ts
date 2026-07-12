@@ -1,22 +1,14 @@
 import {
   Column,
   Entity,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from "typeorm";
-import { Movimentacao } from "./Movimentacao.js";
-import { Produtos } from "./Produtos.js";
-
-export enum EnderecoStatus {
-  LIVRE = "LIVRE",
-  OCUPADO = "OCUPADO",
-  BLOQUEADO = "BLOQUEADO",
-}
+import { Alocacao } from "./Alocacao";
 
 @Entity("enderecos")
-@Unique(["rua", "coluna", "nivel"])
+@Unique(["rua", "estante"])
 export class Endereco {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -24,24 +16,9 @@ export class Endereco {
   @Column({ type: "integer" })
   rua!: number;
 
-  @Column({ type: "integer" })
-  coluna!: number;
+  @Column({ type: "varchar" })
+  estante!: string; // "A" ou "B"
 
-  @Column({ type: "integer" })
-  nivel!: number;
-
-  @Column({ type: "integer" })
-  capacidadeMaxima!: number;
-
-  @Column({ type: "integer", default: 0 })
-  ocupacaoAtual!: number;
-
-  @Column({ type: "enum", enum: EnderecoStatus, default: EnderecoStatus.LIVRE })
-  status!: EnderecoStatus;
-
-  @ManyToOne(() => Produtos, (produto) => produto.enderecos, { nullable: true }) // <-- Ajustado aqui!
-  produto!: Produtos | null;
-
-  @OneToMany(() => Movimentacao, (movimentacao) => movimentacao.endereco)
-  movimentacoes!: Movimentacao[];
+  @OneToMany(() => Alocacao, (alocacao) => alocacao.endereco)
+  alocacoes!: Alocacao[];
 }

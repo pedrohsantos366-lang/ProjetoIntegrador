@@ -15,13 +15,13 @@ export class EnderecoController {
 
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { rua, coluna, nivel, capacidadeMaxima } = req.body;
-      const novoEndereco = await this.enderecoService.create(
-        rua,
-        coluna,
-        nivel,
-        capacidadeMaxima,
-      );
+      const { rua, estante } = req.body;
+      if (!rua || !estante) {
+        return res
+          .status(400)
+          .json({ message: "rua e estante são obrigatórios" });
+      }
+      const novoEndereco = await this.enderecoService.create(rua, estante);
       return res.status(201).json(novoEndereco);
     } catch (error: unknown) {
       next(error);
@@ -31,8 +31,10 @@ export class EnderecoController {
   update = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id = Number(req.params.id);
-      const dados = req.body;
-      const enderecoAtualizado = await this.enderecoService.update(id, dados);
+      const enderecoAtualizado = await this.enderecoService.update(
+        id,
+        req.body
+      );
       return res.status(200).json(enderecoAtualizado);
     } catch (error: unknown) {
       next(error);

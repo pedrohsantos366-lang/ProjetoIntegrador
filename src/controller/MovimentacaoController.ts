@@ -1,46 +1,58 @@
-import { Request, Response } from "express";
-import { MovimentacaoService } from "../service/MovimentacaoService"; // ajuste o caminho se necessário
+import { Request, Response, NextFunction } from "express";
+import { MovimentacaoService } from "../service/MovimentacaoService";
 
 export class MovimentacaoController {
-    private movimentacaoService: MovimentacaoService;
+  private movimentacaoService = new MovimentacaoService();
 
-    constructor() {
-        this.movimentacaoService = new MovimentacaoService();
+  entrada = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.usuario) {
+        return res.status(401).json({ message: "usuário não autenticado" });
+      }
+
+      const { produtoId, quantidade } = req.body;
+      const usuarioId = req.usuario.id;
+
+      if (!produtoId || !quantidade) {
+        return res
+          .status(400)
+          .json({ message: "produtoId e quantidade são obrigatórios" });
+      }
+
+      const movimentacoes = await this.movimentacaoService.registrarEntrada(
+        produtoId,
+        usuarioId,
+        quantidade,
+      );
+      return res.status(201).json(movimentacoes);
+    } catch (error: unknown) {
+      next(error);
     }
+  };
 
-    async create(req: Request, res: Response) {
-        const movimentacao = await this.movimentacaoService.create(req.body);
-        return res.status(201).json(movimentacao);
+  saida = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.usuario) {
+        return res.status(401).json({ message: "usuário não autenticado" });
+      }
+
+      const { produtoId, quantidade } = req.body;
+      const usuarioId = req.usuario.id;
+
+      if (!produtoId || !quantidade) {
+        return res
+          .status(400)
+          .json({ message: "produtoId e quantidade são obrigatórios" });
+      }
+
+      const movimentacoes = await this.movimentacaoService.registrarSaida(
+        produtoId,
+        usuarioId,
+        quantidade,
+      );
+      return res.status(201).json(movimentacoes);
+    } catch (error: unknown) {
+      next(error);
     }
-
-    async listAll(req: Request, res: Response) {
-        const movimentacoes = await this.movimentacaoService.listAll();
-        return res.status(200).json(movimentacoes);
-    }
-
-    async listById(req: Request, res: Response) {
-        const id = Number(req.params.id);
-        if (Number.isNaN(id)) return res.status(400).json({ message: "ID inválido" });
-
-        const movimentacao = await this.movimentacaoService.listById(id);
-        if (!movimentacao) return res.status(404).json({ message: "Movimentação não encontrada" });
-
-        return res.status(200).json(movimentacao);
-    }
-
-  async update(req: Request, res: Response) {
-      const id = Number(req.params.id);
-          if (Number.isNaN(id)) return res.status(400).json({ message: "ID inválido" });
-
-            const movimentacao = await this.movimentacaoService.update(id, req.body);
-            return res.status(200).json(movimentacao);
-}
-
-    //async delete(req: Request, res: Response) {
-        //const id = Number(req.params.id);
-        //if (Number.isNaN(id)) return res.status(400).json({ message: "ID inválido" });
-
-        //await this.movimentacaoService.delete(id);
-        //return res.status(204).send();
-    //}
+  };
 }
